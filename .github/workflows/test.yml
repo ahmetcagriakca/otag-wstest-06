@@ -1,0 +1,22 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run math_utils self-tests
+        run: |
+          if [ -f math_utils.py ]; then
+            python math_utils.py
+          else
+            echo "math_utils.py not found — skipping"
+          fi
